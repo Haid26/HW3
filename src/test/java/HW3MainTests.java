@@ -64,7 +64,7 @@ public class HW3MainTests  {
         $("#react-select-4-option-0").click();
 
         //File upload
-        $("#uploadPicture").uploadFile(new File("src\\test\\cat.jpg"));
+        $("#uploadPicture").uploadFromClasspath("images\\cat.jpg");
 
 
         // all done, submit now
