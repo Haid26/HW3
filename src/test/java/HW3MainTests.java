@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.conditions.Text;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 
@@ -13,7 +14,8 @@ import static com.codeborne.selenide.Condition.*;
 
 public class HW3MainTests  {
 
-    static String firstname, lastname, useremail, usernumber, useradress;
+    static String firstname, lastname, useremail, usernumber, useradress, gender, hobbie1, hobbie2, subject1, subject2, state, city;
+
     @BeforeAll
     static void beforeAll(){
         //Configuration.browserSize = "1920x1080";
@@ -26,21 +28,31 @@ public class HW3MainTests  {
         useremail = "John@tester.son";
         usernumber = "1234567890";
         useradress = "Улица Пушкина дом Колотушкина";
+        hobbie1 = "Sports";
+        hobbie2 = "Music";
+        subject1 = "Maths";
+        subject2 = "Accounting";
+        state = "NCR";
+        city = "Delhi";
+        gender = "Male";
+
     }
 
     @Test
     void mainTest(){
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         //Simple forms
         $("#firstName").setValue(firstname);
         $("#lastName").setValue(lastname);
         $("#userEmail").setValue(useremail);
         $("[for =gender-radio-1]").click();
+        $("#genterWrapper").$(byText(gender)).click();
         $("#userNumber").setValue(usernumber);
         $("#currentAddress").setValue(useradress);
-        $("[for=hobbies-checkbox-1]").click();
-        $("[for=hobbies-checkbox-2]").click();
-        $("[for=hobbies-checkbox-3]").click();
+        $("#hobbiesWrapper").$(byText(hobbie1)).click();
+        $("#hobbiesWrapper").$(byText(hobbie2)).click();
 
         //Date
         $("#dateOfBirthInput").click();
@@ -53,15 +65,16 @@ public class HW3MainTests  {
 
         //Subjects container
         $("#subjectsInput").press("a");
-        $("#react-select-2-option-0").click();
+        $("#subjectsContainer").$(byText(subject1)).click();
         $("#subjectsInput").press("a");
-        $("#react-select-2-option-2").click();
+        $("#subjectsContainer").$(byText(subject2)).click();
+
 
         //State and City
         $("#state").click();
-        $("#react-select-3-option-0").click();
+        $("#state").$(byText(state)).click();
         $("#city").click();
-        $("#react-select-4-option-0").click();
+        $("#city").$(byText(city)).click();
 
         //File upload
         $("#uploadPicture").uploadFromClasspath("images\\cat.jpg");
@@ -71,16 +84,16 @@ public class HW3MainTests  {
         $("#submit").click();
 
         // Ok lets compare data
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[1]/td[2]")).shouldHave(exactText(firstname+" "+lastname));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[2]/td[2]")).shouldHave(exactText(useremail));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[3]/td[2]")).shouldHave(exactText("Male"));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[4]/td[2]")).shouldHave(exactText(usernumber));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[5]/td[2]")).shouldHave(exactText("02 May,1994"));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[6]/td[2]")).shouldHave(exactText("Maths, Arts"));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[7]/td[2]")).shouldHave(exactText("Sports, Reading, Music"));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[8]/td[2]")).shouldHave(exactText("cat.jpg"));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[9]/td[2]")).shouldHave(exactText(useradress));
-        $(By.xpath("//*[@class='table-responsive']//tbody/tr[10]/td[2]")).shouldHave(exactText("NCR Delhi"));
+        $(".modal-body").shouldHave(text(firstname+" "+lastname));
+        $(".modal-body").shouldHave(text(useremail));
+        $(".modal-body").shouldHave(text(gender));
+        $(".modal-body").shouldHave(text(usernumber));
+        $(".modal-body").shouldHave(text("02 May,1994"));
+        $(".modal-body").shouldHave(text(subject1+", "+subject2));
+        $(".modal-body").shouldHave(text(hobbie1+", "+hobbie2));
+        $(".modal-body").shouldHave(text("cat.jpg"));
+        $(".modal-body").shouldHave(text(useradress));
+        $(".modal-body").shouldHave(text(state+" "+city));
 
 
 
