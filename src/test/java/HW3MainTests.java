@@ -84,16 +84,16 @@ public class HW3MainTests  {
         $("#submit").click();
 
         // Ok lets compare data
-        $(".modal-body").shouldHave(text(firstname+" "+lastname));
-        $(".modal-body").shouldHave(text(useremail));
-        $(".modal-body").shouldHave(text(gender));
-        $(".modal-body").shouldHave(text(usernumber));
-        $(".modal-body").shouldHave(text("02 May,1994"));
-        $(".modal-body").shouldHave(text(subject1+", "+subject2));
-        $(".modal-body").shouldHave(text(hobbie1+", "+hobbie2));
-        $(".modal-body").shouldHave(text("cat.jpg"));
-        $(".modal-body").shouldHave(text(useradress));
-        $(".modal-body").shouldHave(text(state+" "+city));
+        $(".modal-body").shouldHave(text("Student Name "+firstname+" "+lastname));
+        $(".modal-body").shouldHave(text("Student Email "+useremail));
+        $(".modal-body").shouldHave(text("Gender "+gender));
+        $(".modal-body").shouldHave(text("Mobile "+usernumber));
+        $(".modal-body").shouldHave(text("Date of Birth 02 May,1994"));
+        $(".modal-body").shouldHave(text("Subjects "+subject1+", "+subject2));
+        $(".modal-body").shouldHave(text("Hobbies "+hobbie1+", "+hobbie2));
+        $(".modal-body").shouldHave(text("Picture cat.jpg"));
+        $(".modal-body").shouldHave(text("Address "+useradress));
+        $(".modal-body").shouldHave(text("State and City "+state+" "+city));
 
 
 
