@@ -1,0 +1,72 @@
+package tests;
+
+import org.junit.jupiter.api.Test;
+import pages.PracticeFormPage;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
+
+public class HW5WithPageObjects extends  TestBase{
+
+    PracticeFormPage practiceFormPage = new PracticeFormPage();
+
+    static String firstname, lastname, useremail, usernumber, useradress, gender, hobbie1, hobbie2, subject1, subject2, state, city, fileurl, bday, bmonth, byear;
+
+
+    @Test
+    void successfulAPFPTest(){
+        firstname =  "John";
+        lastname = "Testerson";
+        useremail = "John@tester.son";
+        usernumber = "1234567890";
+        useradress = "Улица Пушкина дом Колотушкина";
+        hobbie1 = "Sports";
+        hobbie2 = "Music";
+        subject1 = "Maths";
+        subject2 = "Accounting";
+        state = "NCR";
+        city = "Delhi";
+        gender = "Male";
+        fileurl = "cat.jpg";
+        bday = "02";
+        bmonth="May";
+        byear= "1994";
+
+
+        practiceFormPage.openPage()
+                .hideBanners()
+                .setFirstName(firstname)
+                .setLastName(lastname)
+                .setGender(gender)
+                .setUserEmail(useremail)
+                .setUserNumber(usernumber)
+                .setHobbie(hobbie1)
+                .setHobbie(hobbie2)
+                .setUserAdress(useradress)
+                .setSubject(subject1)
+                .setSubject(subject2)
+                .setState(state)
+                .setCity(city)
+                .uploadPicture("images\\"+fileurl)
+                .setDateOfBirth(bday,bmonth,byear)
+                .submitClick();
+
+
+        // Ok lets compare data
+
+        practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
+                        .checkResult("Student Email",useremail)
+                        .checkResult("Gender",gender)
+                        .checkResult("Mobile",usernumber)
+                        .checkResult("Date of Birth",bday+" "+bmonth+","+byear)
+                        .checkResult("Student Name",firstname+" "+lastname)
+                        .checkResult("Subjects",subject1+", "+subject2)
+                        .checkResult("Hobbies",hobbie1+", "+hobbie2)
+                        .checkResult("Picture",fileurl)
+                        .checkResult("Address",useradress)
+                        .checkResult("State and City",state+" "+city);
+
+        sleep(3000);
+    }
+}

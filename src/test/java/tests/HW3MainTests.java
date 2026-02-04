@@ -1,13 +1,10 @@
+package tests;
+
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.conditions.Text;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 
-
-import java.io.File;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
@@ -64,7 +61,7 @@ public class HW3MainTests  {
         $(".react-datepicker__day--002").click();
 
         //Subjects container
-        $("#subjectsInput").press("a");
+        $("#subjectsContainer").press("a");
         $("#subjectsContainer").$(byText(subject1)).click();
         $("#subjectsInput").press("a");
         $("#subjectsContainer").$(byText(subject2)).click();
