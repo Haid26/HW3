@@ -101,4 +101,9 @@ public class PracticeFormPage {
         resultTable.checkResult(key,value);
         return this;
     }
+    public PracticeFormPage checkNoTable()
+    {
+        resultTable.checkNoTable();
+        return this;
+    }
 }

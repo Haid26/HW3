@@ -15,7 +15,7 @@ public class HW5WithPageObjects extends  TestBase{
 
 
     @Test
-    void successfulAPFPTest(){
+    void successfulPracticeFormPageTest(){
         firstname =  "John";
         lastname = "Testerson";
         useremail = "John@tester.son";
@@ -54,19 +54,62 @@ public class HW5WithPageObjects extends  TestBase{
 
 
         // Ok lets compare data
-
         practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
                         .checkResult("Student Email",useremail)
                         .checkResult("Gender",gender)
                         .checkResult("Mobile",usernumber)
                         .checkResult("Date of Birth",bday+" "+bmonth+","+byear)
-                        .checkResult("Student Name",firstname+" "+lastname)
                         .checkResult("Subjects",subject1+", "+subject2)
                         .checkResult("Hobbies",hobbie1+", "+hobbie2)
                         .checkResult("Picture",fileurl)
                         .checkResult("Address",useradress)
                         .checkResult("State and City",state+" "+city);
 
-        sleep(3000);
+        //sleep(3000);
+    }
+
+    @Test
+    void MinValuePracticeFormPageTest(){
+        firstname =  "John";
+        lastname = "Testerson";
+        usernumber = "1234567890";
+        gender = "Male";
+        bday = "02";
+        bmonth="May";
+        byear= "1994";
+
+
+        practiceFormPage.openPage()
+                .hideBanners()
+                .setFirstName(firstname)
+                .setLastName(lastname)
+                .setGender(gender)
+                .setUserNumber(usernumber)
+                .setDateOfBirth(bday,bmonth,byear)
+                .submitClick();
+
+
+        // Ok lets compare data
+        practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
+                .checkResult("Gender",gender)
+                .checkResult("Mobile",usernumber)
+                .checkResult("Date of Birth",bday+" "+bmonth+","+byear);
+        //sleep(3000);
+    }
+
+    //проверка если сразу тыкнуть submit
+    @Test
+    void ValidationTest(){
+
+
+        practiceFormPage.openPage()
+                .hideBanners()
+                .submitClick();
+
+
+        // Ok lets compare data
+        practiceFormPage.checkNoTable();
+
+        //sleep(3000);
     }
 }
