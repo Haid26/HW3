@@ -1,35 +1,36 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
-
+import utils.RandomUtils;
 
 
 public class HW5WithPageObjects extends  TestBase{
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
-    static String firstname, lastname, useremail, usernumber, useradress, gender, hobbie1, hobbie2, subject1, subject2, state, city, fileurl, bday, bmonth, byear;
+    static String firstname, lastname, useremail, usernumber, useradress, gender, state, city, image, fileurl, day, month, year;
 
 
     @Test
     void successfulPracticeFormPageTest(){
-        firstname =  "John";
-        lastname = "Testerson";
-        useremail = "John@tester.son";
-        usernumber = "1234567890";
-        useradress = "Улица Пушкина дом Колотушкина";
-        hobbie1 = "Sports";
-        hobbie2 = "Music";
-        subject1 = "Maths";
-        subject2 = "Accounting";
-        state = "NCR";
-        city = "Delhi";
-        gender = "Male";
-        fileurl = "cat.jpg";
-        bday = "02";
-        bmonth="May";
-        byear= "1994";
+        Faker faker = new Faker();
+        firstname =  faker.name().firstName();
+        lastname = faker.name().lastName();
+        useremail = faker.internet().emailAddress();
+        usernumber = faker.phoneNumber().subscriberNumber(10);
+        useradress = faker.address().fullAddress();
+        gender = RandomUtils.getRandomGender();
+        String[] hobbies =  RandomUtils.getRandomHobbie();
+        String [] subjects = RandomUtils.getRandomSubjects();
+        state = RandomUtils.getRandomState();
+        city = RandomUtils.getRandomCity(state);
+        image = faker.options().option("cat.jpg", "dog.jpg");
+        fileurl = "images\\"+ image;
+        day = RandomUtils.getRandomDay();
+        month = RandomUtils.getRandomMonth();
+        year = ""+RandomUtils.getRandomYear();
 
 
         practiceFormPage.openPage()
@@ -39,15 +40,17 @@ public class HW5WithPageObjects extends  TestBase{
                 .setGender(gender)
                 .setUserEmail(useremail)
                 .setUserNumber(usernumber)
-                .setHobbie(hobbie1)
-                .setHobbie(hobbie2)
+                .setHobbie(hobbies[0])
+                .setHobbie(hobbies[1])
+                .setHobbie(hobbies[2])
                 .setUserAdress(useradress)
-                .setSubject(subject1)
-                .setSubject(subject2)
+                .setSubject(subjects[0])
+                .setSubject(subjects[1])
+                .setSubject(subjects[2])
                 .setState(state)
                 .setCity(city)
-                .uploadPicture("images\\"+fileurl)
-                .setDateOfBirth(bday,bmonth,byear)
+                .uploadPicture(fileurl)
+                .setDateOfBirth(day,month,year)
                 .submitClick();
 
 
@@ -56,10 +59,14 @@ public class HW5WithPageObjects extends  TestBase{
                         .checkResult("Student Email",useremail)
                         .checkResult("Gender",gender)
                         .checkResult("Mobile",usernumber)
-                        .checkResult("Date of Birth",bday+" "+bmonth+","+byear)
-                        .checkResult("Subjects",subject1+", "+subject2)
-                        .checkResult("Hobbies",hobbie1+", "+hobbie2)
-                        .checkResult("Picture",fileurl)
+                        .checkResult("Date of Birth",day+" "+month+","+year)
+                        .checkResult("Subjects",(subjects[0].isEmpty() ? subjects[0]+", ":"")
+                                +(subjects[1].isEmpty() ? subjects[1]+", ":"")
+                                +(subjects[2].isEmpty() ? subjects[2]+", ":""))
+                        .checkResult("Hobbies",(hobbies[0].isEmpty() ? hobbies[0]+", ":"")
+                                +(hobbies[1].isEmpty() ? hobbies[1]+", ":"")
+                                +(hobbies[2].isEmpty() ? hobbies[2]+", ":""))
+                        .checkResult("Picture",image)
                         .checkResult("Address",useradress)
                         .checkResult("State and City",state+" "+city);
 
@@ -68,13 +75,14 @@ public class HW5WithPageObjects extends  TestBase{
 
     @Test
     void MinValuePracticeFormPageTest(){
-        firstname =  "John";
-        lastname = "Testerson";
-        usernumber = "1234567890";
-        gender = "Male";
-        bday = "02";
-        bmonth="May";
-        byear= "1994";
+        Faker faker = new Faker();
+        firstname =  faker.name().firstName();
+        lastname = faker.name().lastName();
+        usernumber = faker.phoneNumber().subscriberNumber(10);
+        gender = RandomUtils.getRandomGender();
+        day = RandomUtils.getRandomDay();
+        month = RandomUtils.getRandomMonth();
+        year = ""+RandomUtils.getRandomYear();
 
 
         practiceFormPage.openPage()
@@ -83,7 +91,7 @@ public class HW5WithPageObjects extends  TestBase{
                 .setLastName(lastname)
                 .setGender(gender)
                 .setUserNumber(usernumber)
-                .setDateOfBirth(bday,bmonth,byear)
+                .setDateOfBirth(day,month,year)
                 .submitClick();
 
 
@@ -91,7 +99,7 @@ public class HW5WithPageObjects extends  TestBase{
         practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
                 .checkResult("Gender",gender)
                 .checkResult("Mobile",usernumber)
-                .checkResult("Date of Birth",bday+" "+bmonth+","+byear);
+                .checkResult("Date of Birth",day+" "+month+","+year);
         //sleep(3000);
     }
 

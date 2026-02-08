@@ -62,7 +62,8 @@ public class PracticeFormPage {
         return this;
     }
     public PracticeFormPage setHobbie (String value){
-        hobbiesPicker.$(byText(value)).click();
+        if (value != "")
+            hobbiesPicker.$(byText(value)).click();
         return this;
     }
     public PracticeFormPage uploadPicture (String fileUrl){
@@ -80,7 +81,9 @@ public class PracticeFormPage {
         return this;
     }
     public PracticeFormPage setSubject (String value){
-        subjectsInput.setValue(value).pressEnter();
+        if (value != "") {
+            subjectsInput.setValue(value).pressEnter();
+        }
         return this;
     }
     public PracticeFormPage setDateOfBirth(String day, String month, String year)

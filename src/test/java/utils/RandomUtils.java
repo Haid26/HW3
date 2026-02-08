@@ -1,17 +1,19 @@
 package utils;
 
+import com.github.javafaker.Faker;
+
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtils {
-
-    public static void main ()
-    {
-        System.out.println(getRandomString(8));
-        System.out.println(getRandomEmail(8,5,3));
-        System.out.println(getRandomInt(333,888));
-
-    }
+    static Faker faker = new Faker();
+//    public static void main ()
+//    {
+//        System.out.println(getRandomString(8));
+//        System.out.println(getRandomEmail(8,5,3));
+//        System.out.println(getRandomInt(333,888));
+//
+//    }
     public static String getRandomString (int len) {
         String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
@@ -42,17 +44,94 @@ public class RandomUtils {
 
     public static String getRandomGender()
     {
-        String[] genders = {"Male","Female", "Other"};
+        return faker.options().option("Male","Female", "Other");
 
-       String randomGender = getRandomItemFromStringArrey(genders);
-
-        return randomGender;
     }
+    public static String[] getRandomHobbie()
+    {
+       String[] hobbies = {"Sports", "Reading", "Music"};
+        return getRandomItemsFromStringArrey(hobbies);
+    }
+    public static String[] getRandomSubjects()
+    {
+        String[] subjects = {"English", "Maths", "Arts"};
+        return getRandomItemsFromStringArrey(subjects);
+    }
+    public static String[] getRandomItemsFromStringArrey (String [] stringArray){
 
-    public static String getRandomItemFromStringArrey (String [] stringArray){
-
-        int randomInt = getRandomInt(0,stringArray.length-1);
-
-        return stringArray[randomInt];
+        String[] result = new String[3];
+        switch (faker.number().numberBetween(0,7)){
+            case 7 -> {
+                result[0]= stringArray[0];
+                result[1]= stringArray[1];
+                result[2]= stringArray[2];
+            }
+            case 6 -> {
+                result[0] = "";
+                result[1]=stringArray[1];
+                result[2]=stringArray[2];
+            }
+            case 5 -> {
+                result[0] = "";
+                result[1]="";
+                result[2]=stringArray[2];
+            }
+            case 4 -> {
+                result[0] = "";
+                result[1]=stringArray[1];
+                result[2]="";
+            }
+            case 3 -> {
+                result[0] = stringArray[0];
+                result[1]="";
+                result[2]=stringArray[2];
+            }
+            case 2 -> {
+                result[0] = stringArray[0];
+                result[1]=stringArray[1];
+                result[2]="";
+            }
+            case 1 -> {
+                result[0] = stringArray[0];
+                result[1]="";
+                result[2]="";
+            }
+            case 0 -> {
+                result[0] = "";
+                result[1]="";
+                result[2]="";
+            }
+        }
+        return result;
+    }
+    static public String getRandomState()
+    {
+        return faker.options().option("NCR","Uttar Pradesh","Haryana","Rajasthan");
+    }
+    static public String getRandomCity(String state)
+    {
+        return switch (state) {
+            case "NCR" -> faker.options().option("Delhi", "Gurgaon", "Noida");
+            case "Uttar Pradesh" -> faker.options().option("Agra", "Lucknow", "Merrut");
+            case "Haryana" -> faker.options().option("Karnal", "Panipat");
+            case "Rajasthan" -> faker.options().option("Jaipur", "Jaiselmer");
+            default -> null;
+        };
+    }
+    static public String getRandomDateFull()
+    {
+        return getRandomDay()+" "+getRandomMonth()+","+getRandomYear();
+    }
+    static public String getRandomDay()
+    {
+        return  ""+faker.number().numberBetween(10,28);
+    }
+    static public String getRandomMonth(){
+        return faker.options().option("January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December");
+    }
+    static public int getRandomYear()
+    {
+        return faker.number().numberBetween(1900,2008);
     }
 }
