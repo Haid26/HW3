@@ -7,40 +7,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtils {
     static Faker faker = new Faker();
-//    public static void main ()
-//    {
-//        System.out.println(getRandomString(8));
-//        System.out.println(getRandomEmail(8,5,3));
-//        System.out.println(getRandomInt(333,888));
-//
-//    }
-    public static String getRandomString (int len) {
-        String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-        SecureRandom rnd = new SecureRandom();
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < len; i++) {
-            result.append(AB.charAt(rnd.nextInt(AB.length())));
-        }
-
-        return result.toString();
-    }
-
-    public static String getRandomEmail (int lenName, int lenHost, int lenDomain)
-    {
-        return getRandomString(lenName)+"@"+getRandomString(lenHost)+"."+getRandomString(lenDomain);
-    }
-
-    public static int getRandomInt (int min, int max)
-    {
-        return ThreadLocalRandom.current().nextInt(min,max+1);
-    }
-
-    public static String getRandomIntAsString (int min, int max)
-    {
-        return getRandomInt(min,max)+"";
-    }
 
     public static String getRandomGender()
     {
@@ -118,10 +84,6 @@ public class RandomUtils {
             default -> null;
         };
     }
-    static public String getRandomDateFull()
-    {
-        return getRandomDay()+" "+getRandomMonth()+","+getRandomYear();
-    }
     static public String getRandomDay()
     {
         return  ""+faker.number().numberBetween(10,28);
@@ -134,4 +96,10 @@ public class RandomUtils {
     {
         return faker.number().numberBetween(1900,2008);
     }
+    static public String getRandomFirstName(){ return faker.name().firstName();    }
+    static public String getRandomLastName(){ return faker.name().lastName();    }
+    static public String getRandomEmail() { return faker.internet().emailAddress();  }
+    static public String getRandomNumber() { return faker.phoneNumber().subscriberNumber(10);  }
+    static public String getRandomAdress() { return faker.address().fullAddress();  }
+    static public String getRandomImage() { return faker.options().option("cat.jpg", "dog.jpg");  }
 }

@@ -15,18 +15,17 @@ public class HW5WithPageObjects extends  TestBase{
 
     @Test
     void successfulPracticeFormPageTest(){
-        Faker faker = new Faker();
-        firstname =  faker.name().firstName();
-        lastname = faker.name().lastName();
-        useremail = faker.internet().emailAddress();
-        usernumber = faker.phoneNumber().subscriberNumber(10);
-        useradress = faker.address().fullAddress();
+        firstname =  RandomUtils.getRandomFirstName();
+        lastname = RandomUtils.getRandomLastName();
+        useremail = RandomUtils.getRandomEmail();
+        usernumber = RandomUtils.getRandomNumber();
+        useradress = RandomUtils.getRandomAdress();
         gender = RandomUtils.getRandomGender();
         String[] hobbies =  RandomUtils.getRandomHobbie();
         String [] subjects = RandomUtils.getRandomSubjects();
         state = RandomUtils.getRandomState();
         city = RandomUtils.getRandomCity(state);
-        image = faker.options().option("cat.jpg", "dog.jpg");
+        image = RandomUtils.getRandomImage();
         fileurl = "images\\"+ image;
         day = RandomUtils.getRandomDay();
         month = RandomUtils.getRandomMonth();
@@ -66,7 +65,7 @@ public class HW5WithPageObjects extends  TestBase{
                         .checkResult("Hobbies",(hobbies[0].isEmpty() ? hobbies[0]+", ":"")
                                 +(hobbies[1].isEmpty() ? hobbies[1]+", ":"")
                                 +(hobbies[2].isEmpty() ? hobbies[2]+", ":""))
-                        .checkResult("Picture",image)
+                        .checkResult("Picture",image )
                         .checkResult("Address",useradress)
                         .checkResult("State and City",state+" "+city);
 
@@ -75,10 +74,9 @@ public class HW5WithPageObjects extends  TestBase{
 
     @Test
     void MinValuePracticeFormPageTest(){
-        Faker faker = new Faker();
-        firstname =  faker.name().firstName();
-        lastname = faker.name().lastName();
-        usernumber = faker.phoneNumber().subscriberNumber(10);
+        firstname =  RandomUtils.getRandomFirstName();
+        lastname = RandomUtils.getRandomLastName();
+        usernumber = RandomUtils.getRandomNumber();
         gender = RandomUtils.getRandomGender();
         day = RandomUtils.getRandomDay();
         month = RandomUtils.getRandomMonth();
