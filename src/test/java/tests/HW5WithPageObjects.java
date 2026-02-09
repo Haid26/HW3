@@ -73,7 +73,7 @@ public class HW5WithPageObjects extends  TestBase{
     }
 
     @Test
-    void MinValuePracticeFormPageTest(){
+    void minValuePracticeFormPageTest(){
         firstname =  RandomUtils.getRandomFirstName();
         lastname = RandomUtils.getRandomLastName();
         usernumber = RandomUtils.getRandomNumber();
@@ -103,7 +103,7 @@ public class HW5WithPageObjects extends  TestBase{
 
     //проверка если сразу тыкнуть submit
     @Test
-    void ValidationTest(){
+    void validationTest(){
 
 
         practiceFormPage.openPage()
