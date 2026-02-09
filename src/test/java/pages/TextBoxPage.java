@@ -15,14 +15,13 @@ public class TextBoxPage {
             submitButton = $("#submit");
 
     private static SimpleOutputComponent simpleOutput = new SimpleOutputComponent();
-    public TextBoxPage openPage()
-    {
+
+    public TextBoxPage openPage(){
         open("/text-box");
         return this;
     }
 
-    public TextBoxPage hideBanners()
-    {
+    public TextBoxPage hideBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;

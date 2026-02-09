@@ -51,7 +51,6 @@ public class HW5WithPageObjects extends  TestBase{
                 .submitClick();
 
 
-        // Ok lets compare data
         practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
                         .checkResult("Student Email",useremail)
                         .checkResult("Gender",gender)
@@ -63,11 +62,10 @@ public class HW5WithPageObjects extends  TestBase{
                         .checkResult("Address",useradress)
                         .checkResult("State and City",state+" "+city);
 
-        //sleep(3000);
     }
 
     @Test
-    void MinValuePracticeFormPageTest(){
+    void minValuePracticeFormPageTest(){
         firstname =  "John";
         lastname = "Testerson";
         usernumber = "1234567890";
@@ -87,27 +85,22 @@ public class HW5WithPageObjects extends  TestBase{
                 .submitClick();
 
 
-        // Ok lets compare data
         practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
                 .checkResult("Gender",gender)
                 .checkResult("Mobile",usernumber)
                 .checkResult("Date of Birth",bday+" "+bmonth+","+byear);
-        //sleep(3000);
     }
 
     //проверка если сразу тыкнуть submit
     @Test
-    void ValidationTest(){
+    void validationTest(){
 
 
         practiceFormPage.openPage()
                 .hideBanners()
                 .submitClick();
 
-
-        // Ok lets compare data
         practiceFormPage.checkNoTable();
 
-        //sleep(3000);
     }
 }

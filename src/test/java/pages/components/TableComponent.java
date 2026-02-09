@@ -9,12 +9,14 @@ import static com.codeborne.selenide.Selenide.*;
 public class TableComponent {
 
     private final static SelenideElement table = $(".table-responsive");
-    public void checkResult (String key, String value)
-    {
+
+    public void checkResult (String key, String value) {
+
         table.$(byText(key)).parent().shouldHave(text(value));
     }
-    public void checkNoTable()
-    {
+
+    public void checkNoTable(){
+
         table.shouldNot().exists();
     }
 }

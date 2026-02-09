@@ -11,7 +11,7 @@ public class TextBoxPageTetst extends TestBase{
     static String fullName, email, currentAddress, permanentAddress;
 
     @Test
-    public void TextBoxPagePositiveTest(){
+    public void textBoxPagePositiveTest(){
         fullName = "Joe Testerson";
         email = "Joe@Tester.son";
         currentAddress = "Улица Пушкина дом Колотушкина";
@@ -28,6 +28,5 @@ public class TextBoxPageTetst extends TestBase{
                 .checkOutput("email",email)
                 .checkOutput("currentAddress",currentAddress)
                 .checkOutput("permanentAddress",permanentAddress);
-        sleep(10000);
     }
 }
