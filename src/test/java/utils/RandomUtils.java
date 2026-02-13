@@ -25,47 +25,55 @@ public class RandomUtils {
     }
     public static String[] getRandomItemsFromStringArrey (String [] stringArray){
 
-        String[] result = new String[3];
+        String[] result = new String[4];
         switch (faker.number().numberBetween(0,7)){
             case 7 -> {
                 result[0]= stringArray[0];
                 result[1]= stringArray[1];
                 result[2]= stringArray[2];
+                result[3]= stringArray[0]+", "+stringArray[1]+", "+stringArray[2];
             }
             case 6 -> {
-                result[0] = "";
-                result[1]=stringArray[1];
-                result[2]=stringArray[2];
+                result[0]= "";
+                result[1]= stringArray[1];
+                result[2]= stringArray[2];
+                result[3]= stringArray[1]+", "+stringArray[2];
             }
             case 5 -> {
-                result[0] = "";
-                result[1]="";
-                result[2]=stringArray[2];
+                result[0]= "";
+                result[1]= "";
+                result[2]= stringArray[2];
+                result[3]= stringArray[2];
             }
             case 4 -> {
                 result[0] = "";
                 result[1]=stringArray[1];
                 result[2]="";
+                result[3]= stringArray[1];
             }
             case 3 -> {
                 result[0] = stringArray[0];
                 result[1]="";
                 result[2]=stringArray[2];
+                result[3]= stringArray[0]+", "+stringArray[2];
             }
             case 2 -> {
                 result[0] = stringArray[0];
                 result[1]=stringArray[1];
                 result[2]="";
+                result[3]= stringArray[0]+", "+stringArray[1];
             }
             case 1 -> {
                 result[0] = stringArray[0];
                 result[1]="";
                 result[2]="";
+                result[3]= stringArray[0];
             }
             case 0 -> {
                 result[0] = "";
                 result[1]="";
                 result[2]="";
+                result[3]= "";
             }
         }
         return result;
