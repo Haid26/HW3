@@ -46,7 +46,7 @@ public class HW5WithPageObjects extends  TestBase{
                 .setSubject(subject2)
                 .setState(state)
                 .setCity(city)
-                .uploadPicture("images\\"+fileurl)
+                .uploadPicture("images/"+fileurl)
                 .setDateOfBirth(bday,bmonth,byear)
                 .submitClick();
 
