@@ -93,7 +93,7 @@ public class HW5WithPageObjects extends  TestBase{
                 .submitClick();
 
 
-        // Ok lets compare data
+
         practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
                 .checkResult("Gender",gender)
                 .checkResult("Mobile",usernumber)
