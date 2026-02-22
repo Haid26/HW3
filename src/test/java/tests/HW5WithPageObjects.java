@@ -33,7 +33,7 @@ public class HW5WithPageObjects extends  TestBase{
 
 
         practiceFormPage.openPage()
-                .hideBanners()
+               // .hideBanners()
                 .setFirstName(firstname)
                 .setLastName(lastname)
                 .setGender(gender)
@@ -80,7 +80,6 @@ public class HW5WithPageObjects extends  TestBase{
 
 
         practiceFormPage.openPage()
-                .hideBanners()
                 .setFirstName(firstname)
                 .setLastName(lastname)
                 .setGender(gender)
@@ -103,7 +102,6 @@ public class HW5WithPageObjects extends  TestBase{
 
 
         practiceFormPage.openPage()
-                .hideBanners()
                 .submitClick();
 
 

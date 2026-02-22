@@ -26,15 +26,14 @@ public class PracticeFormPage {
     private CalendarComponent birthDate = new CalendarComponent();
     private TableComponent resultTable = new TableComponent();
 
+    public PracticeFormPage hideBanners(){
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this;
+    }
     public PracticeFormPage openPage()
     {
         open("/automation-practice-form");
-        return this;
-    }
-    public PracticeFormPage hideBanners()
-    {
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
         return this;
     }
     public PracticeFormPage setFirstName (String value){

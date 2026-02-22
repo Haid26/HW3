@@ -16,14 +16,14 @@ public class RandomUtils {
     public static String[] getRandomHobbie()
     {
        String[] hobbies = {"Sports", "Reading", "Music"};
-        return getRandomItemsFromStringArrey(hobbies);
+        return getRandomItemsFromStringArray(hobbies);
     }
     public static String[] getRandomSubjects()
     {
         String[] subjects = {"English", "Maths", "Arts"};
-        return getRandomItemsFromStringArrey(subjects);
+        return getRandomItemsFromStringArray(subjects);
     }
-    public static String[] getRandomItemsFromStringArrey (String [] stringArray){
+    public static String[] getRandomItemsFromStringArray (String [] stringArray){
 
         String[] result = new String[4];
         switch (faker.number().numberBetween(0,7)){
