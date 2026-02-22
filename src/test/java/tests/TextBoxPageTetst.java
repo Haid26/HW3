@@ -17,7 +17,6 @@ public class TextBoxPageTetst extends TestBase{
         currentAddress = "Улица Пушкина дом Колотушкина";
         permanentAddress = "Улица Колотушкина дом Пушкина";
         textBoxPage.openPage()
-                .hideBanners()
                 .setFullName(fullName)
                 .setEmail(email)
                 .setCurrentAddress(currentAddress)

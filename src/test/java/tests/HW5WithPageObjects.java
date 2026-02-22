@@ -26,7 +26,7 @@ public class HW5WithPageObjects extends  TestBase{
         state = RandomUtils.getRandomState();
         city = RandomUtils.getRandomCity(state);
         image = RandomUtils.getRandomImage();
-        fileurl = "images\\"+ image;
+        fileurl = "images/"+ image;
         day = RandomUtils.getRandomDay();
         month = RandomUtils.getRandomMonth();
         year = ""+RandomUtils.getRandomYear();
