@@ -1,12 +1,19 @@
 package tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Step;
+import io.qameta.allure.Story;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import utils.RandomUtils;
 
+import static io.qameta.allure.Allure.step;
 
-public class HW5WithPageObjects extends  TestBase{
+@Story("Registration form test")
+public class HW5WithPageObjects extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
@@ -14,100 +21,111 @@ public class HW5WithPageObjects extends  TestBase{
 
 
     @Test
-    void successfulPracticeFormPageTest(){
-        firstname =  RandomUtils.getRandomFirstName();
-        lastname = RandomUtils.getRandomLastName();
-        useremail = RandomUtils.getRandomEmail();
-        usernumber = RandomUtils.getRandomNumber();
-        useradress = RandomUtils.getRandomAdress();
-        gender = RandomUtils.getRandomGender();
-        String[] hobbies =  RandomUtils.getRandomHobbie();
-        String [] subjects = RandomUtils.getRandomSubjects();
-        state = RandomUtils.getRandomState();
-        city = RandomUtils.getRandomCity(state);
-        image = RandomUtils.getRandomImage();
-        fileurl = "images/"+ image;
-        day = RandomUtils.getRandomDay();
-        month = RandomUtils.getRandomMonth();
-        year = ""+RandomUtils.getRandomYear();
+    @DisplayName("Successful full registration")
+    void successfulPracticeFormPageTest() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
+        step("Generate random data", () -> {
+            firstname = RandomUtils.getRandomFirstName();
+            lastname = RandomUtils.getRandomLastName();
+            useremail = RandomUtils.getRandomEmail();
+            usernumber = RandomUtils.getRandomNumber();
+            useradress = RandomUtils.getRandomAdress();
+            gender = RandomUtils.getRandomGender();
+            String[] hobbies = RandomUtils.getRandomHobbie();
+            String[] subjects = RandomUtils.getRandomSubjects();
+            state = RandomUtils.getRandomState();
+            city = RandomUtils.getRandomCity(state);
+            image = RandomUtils.getRandomImage();
+            fileurl = "images/" + image;
+            day = RandomUtils.getRandomDay();
+            month = RandomUtils.getRandomMonth();
+            year = "" + RandomUtils.getRandomYear();
+        });
 
-        practiceFormPage.openPage()
-               // .hideBanners()
-                .setFirstName(firstname)
-                .setLastName(lastname)
-                .setGender(gender)
-                .setUserEmail(useremail)
-                .setUserNumber(usernumber)
-                .setHobbie(hobbies[0])
-                .setHobbie(hobbies[1])
-                .setHobbie(hobbies[2])
-                .setUserAdress(useradress)
-                .setSubject(subjects[0])
-                .setSubject(subjects[1])
-                .setSubject(subjects[2])
-                .setState(state)
-                .setCity(city)
-                .uploadPicture(fileurl)
-                .setDateOfBirth(day,month,year)
-                .submitClick();
+        step("Open registration page", () ->
+                practiceFormPage.openPage()
+        );
+        step("Fill registraion form", () -> {
+            practiceFormPage.setFirstName(firstname)
+                    .setLastName(lastname)
+                    .setGender(gender)
+                    .setUserEmail(useremail)
+                    .setUserNumber(usernumber)
+                    .setHobbie(hobbies[0])
+                    .setHobbie(hobbies[1])
+                    .setHobbie(hobbies[2])
+                    .setUserAdress(useradress)
+                    .setSubject(subjects[0])
+                    .setSubject(subjects[1])
+                    .setSubject(subjects[2])
+                    .setState(state)
+                    .setCity(city)
+                    .uploadPicture(fileurl)
+                    .setDateOfBirth(day, month, year)
+                    .submitClick();
+        });
 
+        step("Assertion data in table", () -> {
+            practiceFormPage.checkResult("Student Name", firstname + " " + lastname)
+                    .checkResult("Student Email", useremail)
+                    .checkResult("Gender", gender)
+                    .checkResult("Mobile", usernumber)
+                    .checkResult("Date of Birth", day + " " + month + "," + year)
+                    .checkResult("Subjects", subjects[3])
+                    .checkResult("Hobbies", hobbies[3])
+                    .checkResult("Picture", image)
+                    .checkResult("Address", useradress)
+                    .checkResult("State and City", state + " " + city);
 
-        // Ok lets compare data
-        practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
-                        .checkResult("Student Email",useremail)
-                        .checkResult("Gender",gender)
-                        .checkResult("Mobile",usernumber)
-                        .checkResult("Date of Birth",day+" "+month+","+year)
-                        .checkResult("Subjects",subjects[3])
-                        .checkResult("Hobbies",hobbies[3])
-                        .checkResult("Picture",image )
-                        .checkResult("Address",useradress)
-                        .checkResult("State and City",state+" "+city);
-
-        //sleep(3000);
+        });
     }
 
     @Test
-    void minValuePracticeFormPageTest(){
-        firstname =  RandomUtils.getRandomFirstName();
-        lastname = RandomUtils.getRandomLastName();
-        usernumber = RandomUtils.getRandomNumber();
-        gender = RandomUtils.getRandomGender();
-        day = RandomUtils.getRandomDay();
-        month = RandomUtils.getRandomMonth();
-        year = ""+RandomUtils.getRandomYear();
+    @DisplayName("Successful short registration")
+    void minValuePracticeFormPageTest() {
 
+        step("Generate test data", () -> {
+            firstname = RandomUtils.getRandomFirstName();
+            lastname = RandomUtils.getRandomLastName();
+            usernumber = RandomUtils.getRandomNumber();
+            gender = RandomUtils.getRandomGender();
+            day = RandomUtils.getRandomDay();
+            month = RandomUtils.getRandomMonth();
+            year = "" + RandomUtils.getRandomYear();
+        });
 
-        practiceFormPage.openPage()
-                .setFirstName(firstname)
-                .setLastName(lastname)
-                .setGender(gender)
-                .setUserNumber(usernumber)
-                .setDateOfBirth(day,month,year)
-                .submitClick();
-
-
-
-        practiceFormPage.checkResult("Student Name",firstname+" "+lastname)
-                .checkResult("Gender",gender)
-                .checkResult("Mobile",usernumber)
-                .checkResult("Date of Birth",day+" "+month+","+year);
-        //sleep(3000);
+        step("Open registration form page", () ->
+                practiceFormPage.openPage()
+        );
+        step("Fill registration form", () -> {
+            practiceFormPage.setFirstName(firstname)
+                    .setLastName(lastname)
+                    .setGender(gender)
+                    .setUserNumber(usernumber)
+                    .setDateOfBirth(day, month, year)
+                    .submitClick();
+        });
+        step("Compare data", () -> {
+            practiceFormPage.checkResult("Student Name", firstname + " " + lastname)
+                    .checkResult("Gender", gender)
+                    .checkResult("Mobile", usernumber)
+                    .checkResult("Date of Birth", day + " " + month + "," + year);
+        });
     }
 
-    //проверка если сразу тыкнуть submit
     @Test
-    void validationTest(){
+    @DisplayName("Negative test check mandatory field validation")
+    void validationTest() {
 
-
-        practiceFormPage.openPage()
-                .submitClick();
-
-
-        // Ok lets compare data
-        practiceFormPage.checkNoTable();
-
-        //sleep(3000);
+        step("Open page", () ->
+                practiceFormPage.openPage()
+        );
+        step("Send emtpy form", () ->
+                practiceFormPage.submitClick()
+        );
+        step("Check that there is no table with data", () ->
+                practiceFormPage.checkNoTable()
+        );
     }
 }
