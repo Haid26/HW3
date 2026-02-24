@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import utils.RandomUtils;
 
+import java.util.ArrayList;
+
 import static io.qameta.allure.Allure.step;
 
 @Story("Registration form test")
@@ -18,7 +20,7 @@ public class HW5WithPageObjects extends TestBase {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
 
     static String firstname, lastname, useremail, usernumber, useradress, gender, state, city, image, fileurl, day, month, year;
-
+    String[] hobbies, subjects;
 
     @Test
     @DisplayName("Successful full registration")
@@ -32,8 +34,8 @@ public class HW5WithPageObjects extends TestBase {
             usernumber = RandomUtils.getRandomNumber();
             useradress = RandomUtils.getRandomAdress();
             gender = RandomUtils.getRandomGender();
-            String[] hobbies = RandomUtils.getRandomHobbie();
-            String[] subjects = RandomUtils.getRandomSubjects();
+            hobbies = RandomUtils.getRandomHobbie();
+            subjects = RandomUtils.getRandomSubjects();
             state = RandomUtils.getRandomState();
             city = RandomUtils.getRandomCity(state);
             image = RandomUtils.getRandomImage();
