@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 import static io.qameta.allure.Allure.step;
 
-@Story("Registration form test")
+@Feature("Registration form test")
 public class HW5WithPageObjects extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();

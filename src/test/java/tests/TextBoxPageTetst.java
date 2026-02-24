@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
@@ -9,7 +10,7 @@ import utils.RandomUtils;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
-@Story("Textbox page tests")
+@Feature("Textbox page tests")
 public class TextBoxPageTetst extends TestBase {
     TextBoxPage textBoxPage = new TextBoxPage();
     static String fullName, email, currentAddress, permanentAddress;
