@@ -48,7 +48,7 @@ public class HW5WithPageObjects extends TestBase {
         step("Open registration page", () ->
                 practiceFormPage.openPage()
         );
-        step("Fill registraion form", () -> {
+        step("Fill registration form", () -> {
             practiceFormPage.setFirstName(firstname)
                     .setLastName(lastname)
                     .setGender(gender)

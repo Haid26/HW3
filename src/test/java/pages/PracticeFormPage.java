@@ -83,7 +83,7 @@ public class PracticeFormPage {
         return this;
     }
 
-    @Step("Upload picture \"{value}\"")
+    @Step("Upload picture \"{fileUrl}\"")
     public PracticeFormPage uploadPicture (String fileUrl){
         uploadPicture.uploadFromClasspath(fileUrl);
         return this;
