@@ -26,7 +26,6 @@ public class HW5WithPageObjects extends TestBase {
     @Test
     @DisplayName("Successful full registration")
     void successfulPracticeFormPageTest() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         step("Generate random data", () -> {
             firstname = RandomUtils.getRandomFirstName();
