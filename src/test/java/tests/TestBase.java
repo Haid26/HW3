@@ -33,8 +33,7 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless"));
-       // if (!System.getProperty("remote").isEmpty())
-            Configuration.remote = System.getProperty("remote");
+        Configuration.remote = System.getProperty("remote");
 
 
     }
