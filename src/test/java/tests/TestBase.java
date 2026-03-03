@@ -12,23 +12,31 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.executeAsyncJavaScript;
 
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
+
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 5000;
-        Configuration.browser = "chrome";
-        Configuration.browserVersion = "128.0";
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        Configuration.browserSize = System.getProperty("browserSize");
+        Configuration.baseUrl = System.getProperty("baseUrl");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion");
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless"));
+       // if (!System.getProperty("remote").isEmpty())
+            Configuration.remote = System.getProperty("remote");
+
+
     }
 
     @BeforeEach
