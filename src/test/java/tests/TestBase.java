@@ -18,6 +18,7 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
 
+        System.out.println(System.getProperty("browserVersion"));
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 5000;
 
@@ -31,7 +32,7 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browserSize");
         Configuration.baseUrl = System.getProperty("baseUrl");
         Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion");
+        //Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless"));
         Configuration.remote = System.getProperty("remote");
 
