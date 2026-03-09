@@ -1,9 +1,7 @@
 package tests;
 
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
-import pages.PracticeFormPage;
 import pages.TextBoxPage;
 import utils.RandomUtils;
 

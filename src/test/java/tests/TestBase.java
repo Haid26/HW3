@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.executeAsyncJavaScript;
 
 public class TestBase {
     @BeforeAll
-    static void beforeAll() {
+    static void setupSelenideConfig() {
 
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 5000;

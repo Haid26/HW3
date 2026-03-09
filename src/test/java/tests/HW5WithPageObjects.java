@@ -1,17 +1,11 @@
 package tests;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import com.github.javafaker.Faker;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
-import io.qameta.allure.Story;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import utils.RandomUtils;
 
-import java.util.ArrayList;
 
 import static io.qameta.allure.Allure.step;
 
