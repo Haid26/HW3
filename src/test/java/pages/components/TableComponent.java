@@ -12,7 +12,7 @@ public class TableComponent {
     private final static SelenideElement table = $(".table-responsive");
 
     public void checkResult(String key, String value) {
-       if (!value.isEmpty())
+        if (!value.isEmpty())
             table.$(byText(key)).parent().shouldHave(text(value));
     }
 
